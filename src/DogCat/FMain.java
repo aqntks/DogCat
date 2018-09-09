@@ -11,7 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class FMain extends JFrame implements ActionListener{
+	private JButton diaryBt;
+	private JButton informationBt;
 	private JButton speciesBt;
+	private JButton exitBt;
 
 	public FMain() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -25,10 +28,19 @@ public class FMain extends JFrame implements ActionListener{
 		setIconImage(img);
 
 		setLayout(new FlowLayout());
+		diaryBt = new JButton("다이어리");
+		informationBt = new JButton("정보");
 		speciesBt = new JButton("도감");
+		exitBt = new JButton("종료");
+		this.add(diaryBt);
+		this.add(informationBt);
 		this.add(speciesBt);
+		this.add(exitBt);
 
+		diaryBt.addActionListener(this);
+		informationBt.addActionListener(this);
 		speciesBt.addActionListener(this);
+		exitBt.addActionListener(this);
 
 		setVisible(true);
 	}
@@ -43,6 +55,15 @@ public class FMain extends JFrame implements ActionListener{
 			dogcat.setVisible(true);
 			dogcat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
-			
+		if(e.getSource() == informationBt) {
+			FInformation information = new FInformation();
+		}
+		if(e.getSource() == diaryBt) {
+			FDiary diary = new FDiary();
+		}
+		if(e.getSource() == exitBt) {
+			System.exit(0);
+		}
+
 	}
 }
