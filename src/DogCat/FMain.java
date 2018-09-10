@@ -54,12 +54,15 @@ public class FMain extends JFrame implements ActionListener{
 			dogcat.pack();
 			dogcat.setVisible(true);
 			dogcat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			dispose();
 		}
 		if(e.getSource() == informationBt) {
 			FInformation information = new FInformation();
+			dispose();
 		}
 		if(e.getSource() == diaryBt) {
 			FDiary diary = new FDiary();
+			dispose();
 		}
 		if(e.getSource() == exitBt) {
 			System.exit(0);
