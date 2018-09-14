@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,8 +15,10 @@ import javax.swing.JPanel;
 
 public class FDiary extends JFrame {
 	private JButton[] dayBt;
+	private JPanel weekP;
 	private JPanel diaryP;
 	private JLabel yearMonthL;
+	private JLabel weekL;
 	private JComboBox yearCb;
 	private JComboBox monthCb;
 	private String[] year = {"2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", 
@@ -28,6 +31,8 @@ public class FDiary extends JFrame {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		diaryP = new JPanel();
+		weekP = new JPanel();
+		weekL = new JLabel();
 		yearMonthL = new JLabel("년 월");
 		yearCb = new JComboBox(year);
 		monthCb = new JComboBox(month);
@@ -36,8 +41,18 @@ public class FDiary extends JFrame {
 		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
 		setTitle("다이어리");  //프레임 이름
 
-		diaryP.setLayout(new GridLayout(7, 5));
+		diaryP.setLayout(new GridLayout(7, 7));
+		weekP.setLayout(new GridLayout(7, 7));
 		dayBt = new JButton[35];
+		
+		weekP.add(weekL = new JLabel("일요일"));
+		weekP.add(weekL = new JLabel("월요일"));
+		weekP.add(weekL = new JLabel("화요일"));
+		weekP.add(weekL = new JLabel("수요일"));
+		weekP.add(weekL = new JLabel("목요일"));
+		weekP.add(weekL = new JLabel("금요일"));
+		weekP.add(weekL = new JLabel("토요일"));
+		
 
 		int index = 0;
 		for(int rows = 0; rows < 7; rows++) {
@@ -49,7 +64,8 @@ public class FDiary extends JFrame {
 				index++;
 			}
 		}
-		add(yearMonthL, BorderLayout.CENTER);
+		add(yearMonthL, BorderLayout.PAGE_START);
+		add(weekP, BorderLayout.CENTER);
 		add(yearCb, BorderLayout.LINE_START);
 		add(monthCb, BorderLayout.LINE_END);
 		add(diaryP, BorderLayout.PAGE_END);
