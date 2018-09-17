@@ -45,14 +45,7 @@ public class FDiary extends JFrame {
 		weekP.setLayout(new GridLayout(7, 7));
 		dayBt = new JButton[35];
 		
-		weekP.add(weekL = new JLabel("일요일"));
-		weekP.add(weekL = new JLabel("월요일"));
-		weekP.add(weekL = new JLabel("화요일"));
-		weekP.add(weekL = new JLabel("수요일"));
-		weekP.add(weekL = new JLabel("목요일"));
-		weekP.add(weekL = new JLabel("금요일"));
-		weekP.add(weekL = new JLabel("토요일"));
-		
+		weekP.add(weekL = new JLabel("일요일 월요일 화요일 수요일 목요일 금요일 토요일"));
 
 		int index = 0;
 		for(int rows = 0; rows < 7; rows++) {
