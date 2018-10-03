@@ -74,8 +74,12 @@ public class FDiary extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		//메모장 실행
 		if(e.getSource() == dayBt[10]) {
-			DayMemo dm = new DayMemo(btDay);
+			if(SaveMemo.cheakMemo(btDay) == false)
+			{DayMemo dm = new DayMemo(btDay);}
+			else
+			{new DayMemo(SaveMemo.getMemo(btDay));}
 		}
 
 	}

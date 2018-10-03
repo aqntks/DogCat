@@ -23,6 +23,7 @@ public class DayMemo extends JFrame implements ActionListener{
 	private JMenuItem saveMenu, closeMenu;
 	public Day day;
 
+
 	public DayMemo(Day day) {
 		//어느 날짜의 메모인지 정보
 		this.day = day;
@@ -37,6 +38,53 @@ public class DayMemo extends JFrame implements ActionListener{
 
 		//기록 창
 		taMemo = new JTextArea();
+		//하단 판넬
+		pMemo = new JPanel();
+		//상단 메뉴 바 
+		mbMemo = new JMenuBar();
+		menuMemo = new JMenu("메뉴");
+		//상단 메뉴 내 기능
+		saveMenu = new JMenuItem("저장");
+		closeMenu =new JMenuItem("종료");
+		//하단 저장, 종료 버튼
+		bSaveMemo = new JButton("저장");
+		bCloseMemo = new JButton("종료");
+
+		this.add(taMemo);
+		this.add(pMemo, BorderLayout.SOUTH);
+		pMemo.add(bSaveMemo);
+		pMemo.add(bCloseMemo);
+
+		this.setJMenuBar(mbMemo);
+		//메뉴 메뉴 추가
+		mbMemo.add(menuMemo);
+		//메뉴 내 기능
+		menuMemo.add(saveMenu);
+		menuMemo.add(closeMenu);
+
+		bSaveMemo.addActionListener(this);
+		bCloseMemo.addActionListener(this);
+		saveMenu.addActionListener(this);
+		closeMenu.addActionListener(this); 
+
+		setVisible(true);
+
+	}
+	//로드용 생성자
+	public DayMemo(DayMemo dm) {
+		//어느 날짜의 메모인지 정보
+		this.day = dm.day;
+		
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = kit.getScreenSize();
+
+		setSize(500,500);  //프레임 사이즈
+		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setTitle(day.years + "년" + day.months + "월" + day.days + "일");  //프레임 이름
+
+		//기록 창
+		taMemo = SaveMemo.getMemo(day).taMemo;
 		//하단 판넬
 		pMemo = new JPanel();
 		//상단 메뉴 바 
