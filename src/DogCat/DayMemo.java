@@ -21,7 +21,9 @@ public class DayMemo extends JFrame implements ActionListener{
 	private JMenuBar mbMemo;
 	private JMenu menuMemo;
 	private JMenuItem saveMenu, closeMenu;
+	public Day yearMonth;
 	public Day day;
+	
 
 
 	public DayMemo(Day day) {
