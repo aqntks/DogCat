@@ -46,7 +46,7 @@ public class FDiary extends JFrame implements ActionListener{
 		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
 		setTitle("다이어리");  //프레임 이름
 
-		diaryP.setLayout(new GridLayout(7, 7));
+		diaryP.setLayout(new GridLayout(5, 7));
 		weekP.setLayout(new GridLayout(7, 7));
 		dayBt = new JButton[35];
 
