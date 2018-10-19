@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 public class FDiary extends JFrame implements ActionListener{
 	private JButton[] dayBt;
 	private JPanel weekP;
-	private JPanel diaryP;
+	private DayPanel diaryP;
 	private JLabel yearMonthL;
 	private JLabel weekL;
 	private JComboBox yearCb;
@@ -26,16 +26,14 @@ public class FDiary extends JFrame implements ActionListener{
 	private String[] year = {"2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", 
 			"2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2020", "2021"};
 	private String[] month = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-	private String[] days = {"1" ,"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-			"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " ", " ", " ", " "};
 	public Day btDay = new Day(2010, 1, 11);  // 버튼에 맞는 날짜값  ->> 아직 구현 안함
-	public Day yearMonth;
+	public Day yearMonth = new Day(2010 , 2); // 선택된 년 월에 맞는 날짜 패널을 가져오기위한 변수값 선택된 년 월 이 언제인지 저장해야함
 
 	public FDiary() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		
-		diaryP = new JPanel();
+		diaryP = new DayPanel(yearMonth);
 		weekP = new JPanel();
 		weekL = new JLabel();
 		yearMonthL = new JLabel("년 월");
@@ -46,32 +44,21 @@ public class FDiary extends JFrame implements ActionListener{
 		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
 		setTitle("다이어리");  //프레임 이름
 
-		diaryP.setLayout(new GridLayout(5, 7));
 		weekP.setLayout(new GridLayout(7, 7));
 		dayBt = new JButton[35];
 
 		weekP.add(weekL = new JLabel("일요일 월요일 화요일 수요일 목요일 금요일 토요일"));
 
-		int index = 0;
-		for(int rows = 0; rows < 5; rows++) {
-			for(int cols = 0; cols < 7; cols++) {
-				dayBt[index] = new JButton(days[index]);
-				dayBt[index].setForeground(Color.blue);
-				dayBt[index].setBackground(Color.yellow);
-				diaryP.add(dayBt[index]);
-				index++;
-			}
-		}
+	
 		add(yearMonthL, BorderLayout.PAGE_START);
 		add(weekP, BorderLayout.CENTER);
 		add(yearCb, BorderLayout.LINE_START);
 		add(monthCb, BorderLayout.LINE_END);
-		add(diaryP, BorderLayout.PAGE_END);
+		add(diaryP.panel(), BorderLayout.PAGE_END);
 		pack();
 
 		yearCb.addActionListener(this);
 		monthCb.addActionListener(this);
-		dayBt[10].addActionListener(this);
 		setVisible(true);
 	}
 	@Override
@@ -82,14 +69,6 @@ public class FDiary extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == yearCb) {
 			//콤보박스 선택시 그에 맞는 day 패널 만들어야함
-		}
-		//메모장 실행
-		if(e.getSource() == dayBt[10]) {
-					//새 메모장 생성
-			if(SaveMemo.cheakMemo(btDay) == false)
-			{DayMemo dm = new DayMemo(btDay);}
-			else	// 생성된 적 있는 메모장 로드
-			{new DayMemo(SaveMemo.getMemo(btDay));}
 		}
 
 	}
