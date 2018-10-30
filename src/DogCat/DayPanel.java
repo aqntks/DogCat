@@ -54,7 +54,17 @@ public class DayPanel implements ActionListener {
 	public JPanel panel() {
 		return dayPanel;
 	}
+	public void panelRevalidate() {
+		dayPanel.revalidate();
+	}
+	public void panelRepaint() {
+		dayPanel.repaint();
+	}
+	public void panelRemoveAll() {
+		dayPanel.removeAll();
+	}
 	public void change() {
+		
 		//다이어리에서 년 월을 선택 시 새 판낼 리턴할 함수 만들어야함
 	}
 
