@@ -20,13 +20,14 @@ public class FDiary extends JFrame implements ActionListener{
 	private JPanel weekP;
 	private DayPanel diaryP;
 	private JLabel yearMonthL;
+	private YearMonthPanel yearMonthPanel = new YearMonthPanel();
 	private JLabel weekL;
 	private JComboBox yearCb;
 	private JComboBox monthCb;
 	private String[] year = {"2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", 
 			"2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2020", "2021"};
 	private String[] month = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-	public Day yearMonth = new Day(2010 , 3); // 선택된 년 월에 맞는 날짜 패널을 가져오기위한 변수값 선택된 년 월 이 언제인지 저장해야함
+	public Day yearMonth = Today.tDay; // 선택된 년 월에 맞는 날짜 패널을 가져오기위한 변수값 선택된 년 월 이 언제인지 저장해야함
 
 	public FDiary() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -54,36 +55,36 @@ public class FDiary extends JFrame implements ActionListener{
 		weekP.add(weekL = new JLabel("일요일 월요일 화요일 수요일 목요일 금요일 토요일"));
 
 
-		add(yearMonthL, BorderLayout.PAGE_START);
-		add(weekP, BorderLayout.CENTER);
-		add(yearCb, BorderLayout.LINE_START);
-		add(monthCb, BorderLayout.LINE_END);
-		add(diaryP.panel(), BorderLayout.PAGE_END);
+		add(yearMonthPanel, BorderLayout.PAGE_START);
+		//add(weekP, BorderLayout.CENTER);
+		//add(yearCb, BorderLayout.LINE_START);
+		//add(monthCb, BorderLayout.LINE_END);
+		add(diaryP.panel(), BorderLayout.CENTER);
 		pack();
 
-		yearCb.addActionListener(this);
-		monthCb.addActionListener(this);
+		yearMonthPanel.yearCb.addActionListener(this);
+		yearMonthPanel.monthCb.addActionListener(this);
 		setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(e.getSource() == yearCb) {
+		if(e.getSource() == yearMonthPanel.yearCb) {
 			//콤보박스 선택시 그에 맞는 day 패널 만들어야함
 			diaryP.panelRemoveAll();
-			yearMonth = new Day(yearCb.getSelectedIndex()+2000 , yearMonth.months);
+			yearMonth = new Day(yearMonthPanel.yearCb.getSelectedIndex()+2000 , yearMonth.months);
 			diaryP = new DayPanel(yearMonth);
-			add(diaryP.panel(), BorderLayout.PAGE_END);
+			add(diaryP.panel(), BorderLayout.CENTER);
 			diaryP.panelRevalidate();
 			diaryP.panelRepaint();
 		}
-		if(e.getSource() == monthCb) {
+		if(e.getSource() == yearMonthPanel.monthCb) {
 
 			diaryP.panelRemoveAll();
-			yearMonth = new Day(yearMonth.years , monthCb.getSelectedIndex()+1);
+			yearMonth = new Day(yearMonth.years , yearMonthPanel.monthCb.getSelectedIndex()+1);
 			diaryP = new DayPanel(yearMonth);
-			add(diaryP.panel(), BorderLayout.PAGE_END);
+			add(diaryP.panel(), BorderLayout.CENTER);
 			diaryP.panelRevalidate();
 			diaryP.panelRepaint();
 
