@@ -10,21 +10,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class DayPanel implements ActionListener {
-	private JPanel dayPanel;
+public class DayPanel extends JPanel implements ActionListener {
 	private JLabel[] weekLabel;
 	private String[] weeks = {"일", "월", "화", "수", "목", "금", "토"};
 	private JButton[] dayButton;
 	private String[] days;
 	private Day day;
+	//그 month에 몇개의  앞 공백이 있나 카운트
+	private int nextCount = 0;
 
 	public DayPanel(Day day) {
 		this.day = day;
-		dayPanel = new JPanel();
-		dayPanel.setLayout(new GridLayout(6, 7));
-		dayButton = new JButton[35];
-		days = new String[35];
+		setLayout(new GridLayout(7, 7));
+		dayButton = new JButton[42];
+		days = new String[42];
 		weekLabel = new JLabel[7];
+
+		
+		//초기 달력 정하기
+		if(day.years == 2000 && day.months == 1) {
+			for(int j = 0; j < 6; j++) {
+				dayButton[j] = new JButton(days[j]);
+			dayButton[j].setBackground(Color.LIGHT_GRAY);
+				add(dayButton[j]);
+				nextCount++;
+			}
+		}
 
 		switch(day.months) {
 		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -50,44 +61,33 @@ public class DayPanel implements ActionListener {
 				weekLabel[i].setForeground(Color.gray);
 			else
 				weekLabel[i].setForeground(Color.MAGENTA);
-			dayPanel.add(weekLabel[i]);
+			add(weekLabel[i]);
 		}
 
 		//날짜 버튼 
 		int index = 0;
-		for(int i = 1; i <= 35; i++) {
-			dayButton[index] = new JButton(days[index]);
-			dayButton[index].setBackground(Color.LIGHT_GRAY);
-			if(i % 7 == 1)
-				dayButton[index].setForeground(Color.RED);
-			else if(i % 7 == 0)
-				dayButton[index].setForeground(Color.MAGENTA);
+		for(int i = nextCount; i < 42; i++) {
+			dayButton[i] = new JButton(days[index]);
+			dayButton[i].setBackground(Color.LIGHT_GRAY);
+			if(i % 7 == 0)
+				dayButton[i].setForeground(Color.RED);
+			else if(i % 7 == 6)
+				dayButton[i].setForeground(Color.MAGENTA);
 			else
-				dayButton[index].setForeground(Color.blue);
+				dayButton[i].setForeground(Color.blue);
 
-			dayPanel.add(dayButton[index]);
+			add(dayButton[i]);
 			index++;
 		}
-		
-		//오늘 날짜 회색으로 표시
-		dayButton[Today.tDate-1].setBackground(Color.GRAY);
 
-		for(int i = 0; i < 35; i++) {
+		//오늘 날짜 회색으로 표시
+		if(day.years == Today.tYear && day.months == Today.tMonth)
+			dayButton[Today.tDate-1].setBackground(Color.GRAY);
+
+		for(int i = 0; i < 42; i++) {
 			dayButton[i].addActionListener(this); 
 		}
 
-	}
-	public JPanel panel() {
-		return dayPanel;
-	}
-	public void panelRevalidate() {
-		dayPanel.revalidate();
-	}
-	public void panelRepaint() {
-		dayPanel.repaint();
-	}
-	public void panelRemoveAll() {
-		dayPanel.removeAll();
 	}
 	public void change() {
 
@@ -97,7 +97,7 @@ public class DayPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		for(int i = 0; i < 35; i++) {
+		for(int i = 0; i < 42; i++) {
 			if(e.getSource() == dayButton[i]) {
 				//새 메모장 생성
 				if(SaveMemo.cheakMemo(new Day(day.years, day.months, i+1)) == false)

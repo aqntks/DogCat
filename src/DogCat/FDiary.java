@@ -24,9 +24,6 @@ public class FDiary extends JFrame implements ActionListener{
 	private JLabel weekL;
 	private JComboBox yearCb;
 	private JComboBox monthCb;
-	private String[] year = {"2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", 
-			"2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2020", "2021"};
-	private String[] month = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
 	public Day yearMonth = Today.tDay; // 선택된 년 월에 맞는 날짜 패널을 가져오기위한 변수값 선택된 년 월 이 언제인지 저장해야함
 
 	public FDiary() {
@@ -59,7 +56,7 @@ public class FDiary extends JFrame implements ActionListener{
 		//add(weekP, BorderLayout.CENTER);
 		//add(yearCb, BorderLayout.LINE_START);
 		//add(monthCb, BorderLayout.LINE_END);
-		add(diaryP.panel(), BorderLayout.CENTER);
+		add(diaryP, BorderLayout.CENTER);
 		pack();
 
 		yearMonthPanel.yearCb.addActionListener(this);
@@ -72,21 +69,21 @@ public class FDiary extends JFrame implements ActionListener{
 	{
 		if(e.getSource() == yearMonthPanel.yearCb) {
 			//콤보박스 선택시 그에 맞는 day 패널 만들어야함
-			diaryP.panelRemoveAll();
+			diaryP.removeAll();
 			yearMonth = new Day(yearMonthPanel.yearCb.getSelectedIndex()+2000 , yearMonth.months);
 			diaryP = new DayPanel(yearMonth);
-			add(diaryP.panel(), BorderLayout.CENTER);
-			diaryP.panelRevalidate();
-			diaryP.panelRepaint();
+			add(diaryP, BorderLayout.CENTER);
+			diaryP.revalidate();
+			diaryP.repaint();
 		}
 		if(e.getSource() == yearMonthPanel.monthCb) {
 
-			diaryP.panelRemoveAll();
+			diaryP.removeAll();
 			yearMonth = new Day(yearMonth.years , yearMonthPanel.monthCb.getSelectedIndex()+1);
 			diaryP = new DayPanel(yearMonth);
-			add(diaryP.panel(), BorderLayout.CENTER);
-			diaryP.panelRevalidate();
-			diaryP.panelRepaint();
+			add(diaryP, BorderLayout.CENTER);
+			diaryP.revalidate();
+			diaryP.repaint();
 
 
 			//콤보박스 선택시 그에 맞는 day 패널 만들어야함
