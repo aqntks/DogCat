@@ -6,5 +6,8 @@ public class Main extends JFrame{
 
 	public static void main(String[] args) {
 		FMain fmain = new FMain();  //프레임 생성
+		fmain.add(new LoadImageApp2());
+		fmain.pack();
+		fmain.setVisible(true);
 	}
 }
