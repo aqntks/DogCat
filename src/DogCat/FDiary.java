@@ -43,7 +43,7 @@ public class FDiary extends JFrame implements ActionListener{
 			monthCb.addItem(i);
 
 		setSize(500,500);  //프레임 사이즈
-		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
+		setLocation(1200, 200);  //프레임 생성 위치
 		setTitle("다이어리");  //프레임 이름
 
 		weekP.setLayout(new GridLayout(7, 7));

@@ -20,8 +20,8 @@ public class FDogCat extends JFrame implements ActionListener {
 		Dimension screenSize = kit.getScreenSize();
 
 		setSize(300,300);  //프레임 사이즈
-		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setLocation(1200, 400);  //프레임 생성 위치
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setTitle("DogCat");  //프레임 이름
 		Image img = kit.getImage("main_icon.gif");  // 아이콘 이미지
 		setIconImage(img);
