@@ -28,8 +28,8 @@ public class FDogCat extends JFrame implements ActionListener {
 		setVisible(true);
 
 		setLayout(new BorderLayout());
-		dogButton = new JButton("멍멍이");
-		catButton = new JButton("냥냥이");
+		dogButton = new JButton("강아지");
+		catButton = new JButton("고양이");
 		endButton = new JButton("종료");
 		this.add(dogButton, BorderLayout.LINE_START);
 		this.add(catButton, BorderLayout.LINE_END);
@@ -52,6 +52,7 @@ public class FDogCat extends JFrame implements ActionListener {
 		if(e.getSource() == catButton)
 			new FCat();
 		if(e.getSource() == endButton)
-			System.exit(0);
+			dispose();
+		//System.exit(0);
 	}
 }

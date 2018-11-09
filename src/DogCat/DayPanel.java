@@ -31,7 +31,7 @@ public class DayPanel extends JPanel implements ActionListener {
 		if(day.years == 2000 && day.months == 1) {
 			for(int j = 0; j < 6; j++) {
 				dayButton[j] = new JButton(days[j]);
-			dayButton[j].setBackground(Color.LIGHT_GRAY);
+			dayButton[j].setBackground(new Color(250, 237, 210));
 				add(dayButton[j]);
 				nextCount++;
 			}
@@ -56,11 +56,11 @@ public class DayPanel extends JPanel implements ActionListener {
 		for(int i = 0; i < 7; i++) {
 			weekLabel[i] = new JLabel(weeks[i], SwingConstants.CENTER);
 			if(i == 0)
-				weekLabel[i].setForeground(Color.RED);
+				weekLabel[i].setForeground(new Color(189, 61, 61));
 			else if (i < 6)
-				weekLabel[i].setForeground(Color.gray);
+				weekLabel[i].setForeground(new Color(102, 102, 102));
 			else
-				weekLabel[i].setForeground(Color.MAGENTA);
+				weekLabel[i].setForeground(new Color(67, 127, 193));
 			add(weekLabel[i]);
 		}
 
@@ -68,13 +68,13 @@ public class DayPanel extends JPanel implements ActionListener {
 		int index = 0;
 		for(int i = nextCount; i < 42; i++) {
 			dayButton[i] = new JButton(days[index]);
-			dayButton[i].setBackground(Color.LIGHT_GRAY);
+			dayButton[i].setBackground(new Color(250, 237, 210));
 			if(i % 7 == 0)
-				dayButton[i].setForeground(Color.RED);
+				dayButton[i].setForeground(new Color(189, 61, 61));
 			else if(i % 7 == 6)
-				dayButton[i].setForeground(Color.MAGENTA);
+				dayButton[i].setForeground(new Color(67, 127, 193));
 			else
-				dayButton[i].setForeground(Color.blue);
+				dayButton[i].setForeground(new Color(102, 102, 102));
 
 			add(dayButton[i]);
 			index++;
@@ -82,7 +82,7 @@ public class DayPanel extends JPanel implements ActionListener {
 
 		//오늘 날짜 회색으로 표시
 		if(day.years == Today.tYear && day.months == Today.tMonth)
-			dayButton[Today.tDate-1].setBackground(Color.GRAY);
+			dayButton[Today.tDate-1].setBackground(new Color(236, 187, 83));
 
 		for(int i = 0; i < 42; i++) {
 			dayButton[i].addActionListener(this); 

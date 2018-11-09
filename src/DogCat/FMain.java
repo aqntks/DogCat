@@ -1,6 +1,7 @@
 package DogCat;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -8,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,15 +33,23 @@ public class FMain extends JFrame implements ActionListener{
 		setTitle("마이펫 다이어리");  //프레임 이름
 		Image img = kit.getImage("main_icon.gif");  // 아이콘 이미지
 		setIconImage(img);
-
+		
+		//ImageIcon normalIcon = new ImageIcon("diarybutton.jpg");
+		
 		eastPanel.setLayout(new GridLayout(5, 1));
 		setLayout(new BorderLayout());
 		diaryBt = new JButton("다이어리");
 		profileBt = new JButton("프로필 등록");
 		informationBt = new JButton("정보");
-		speciesBt = new JButton("도감");
+		speciesBt = new JButton("종");
 		exitBt = new JButton("종료");
-		
+	
+		diaryBt.setBackground(new Color(245, 220, 168));
+		profileBt.setBackground(new Color(160, 190, 224));
+		informationBt.setBackground(new Color(160, 190, 224));
+		speciesBt.setBackground(new Color(160, 190, 224));
+		exitBt.setBackground(new Color(216, 216, 216));
+	
 		eastPanel.add(diaryBt);
 		eastPanel.add(profileBt);
 		eastPanel.add(speciesBt);

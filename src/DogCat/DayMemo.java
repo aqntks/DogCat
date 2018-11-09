@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -34,9 +35,9 @@ public class DayMemo extends JFrame implements ActionListener{
 		Dimension screenSize = kit.getScreenSize();
 
 		setSize(500,500);  //프레임 사이즈
-		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		setTitle(day.years + "년" + day.months + "월" + day.days + "일");  //프레임 이름
+		setLocation(1200, 500);  //프레임 생성 위치
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setTitle(day.years + "년 " + day.months + "월 " + day.days + "일");  //프레임 이름
 
 		//기록 창
 		taMemo = new JTextArea();
@@ -81,9 +82,9 @@ public class DayMemo extends JFrame implements ActionListener{
 		Dimension screenSize = kit.getScreenSize();
 
 		setSize(500,500);  //프레임 사이즈
-		setLocation(screenSize.width/2, screenSize.height/2);  //프레임 생성 위치
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		setTitle(day.years + "년" + day.months + "월" + day.days + "일");  //프레임 이름
+		setLocation(1200, 500);  //프레임 생성 위치
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setTitle(day.years + "년 " + day.months + "월 " + day.days + "일");  //프레임 이름
 
 		//기록 창
 		taMemo = SaveMemo.getMemo(day).taMemo;
@@ -118,6 +119,7 @@ public class DayMemo extends JFrame implements ActionListener{
 
 		setVisible(true);
 
+		
 	}
 
 	@Override
@@ -125,6 +127,7 @@ public class DayMemo extends JFrame implements ActionListener{
 	{
 		if(e.getSource() == saveMenu || e.getSource() == bSaveMemo) {
 			SaveMemo.save(this, day);
+			JOptionPane.showMessageDialog(this, "                               저장완료", " 안내", JOptionPane.PLAIN_MESSAGE);
 		}
 		if(e.getSource() == closeMenu || e.getSource() == bCloseMemo)
 			dispose();

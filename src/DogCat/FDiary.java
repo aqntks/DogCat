@@ -42,7 +42,7 @@ public class FDiary extends JFrame implements ActionListener{
 		for(int i = 1; i<= 12; i++)
 			monthCb.addItem(i);
 
-		setSize(500,500);  //프레임 사이즈
+		setSize(1000,1000);  //프레임 사이즈
 		setLocation(1200, 200);  //프레임 생성 위치
 		setTitle("다이어리");  //프레임 이름
 
