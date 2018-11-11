@@ -20,6 +20,7 @@ public class DayPanel extends JPanel implements ActionListener {
 	private int nextCount = 0;
 	//month에 몇개의 앞 공백이 있나 저장해논 배열 (index[1] 이 2000년 1월)(index[0]은 쓰레기 값)
 	private int[] blank = new int[373];
+	public int when;
 
 	public DayPanel(Day day) {
 		this.day = day;
@@ -27,7 +28,7 @@ public class DayPanel extends JPanel implements ActionListener {
 		dayButton = new JButton[42];
 		days = new String[42];
 		weekLabel = new JLabel[7];
-		int when = (day.years - 2000)*12 + day.months;
+		when = (day.years - 2000)*12 + day.months;
 		fillBlank();
 
 	
@@ -128,8 +129,8 @@ public class DayPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		for(int i = 0; i < 42; i++) {
-			if(e.getSource() == dayButton[i]) {
+		for(int i = 0; i < 42 - blank[when]; i++) {
+			if(e.getSource() == dayButton[blank[when]+i]) {
 				//새 메모장 생성
 				if(SaveMemo.cheakMemo(new Day(day.years, day.months, i+1)) == false)
 				{DayMemo dm = new DayMemo(new Day(day.years, day.months, i+1));}                                    
