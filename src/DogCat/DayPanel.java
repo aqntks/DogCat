@@ -18,6 +18,8 @@ public class DayPanel extends JPanel implements ActionListener {
 	private Day day;
 	//그 month에 몇개의  앞 공백이 있나 카운트
 	private int nextCount = 0;
+	//month에 몇개의 앞 공백이 있나 저장해논 배열 (index[1] 이 2000년 1월)(index[0]은 쓰레기 값)
+	private int[] blank = new int[373];
 
 	public DayPanel(Day day) {
 		this.day = day;
@@ -25,18 +27,10 @@ public class DayPanel extends JPanel implements ActionListener {
 		dayButton = new JButton[42];
 		days = new String[42];
 		weekLabel = new JLabel[7];
+		int when = (day.years - 2000)*12 + day.months;
+		fillBlank();
 
-		
-		//초기 달력 정하기
-		if(day.years == 2000 && day.months == 1) {
-			for(int j = 0; j < 6; j++) {
-				dayButton[j] = new JButton(days[j]);
-			dayButton[j].setBackground(new Color(250, 237, 210));
-				add(dayButton[j]);
-				nextCount++;
-			}
-		}
-
+	
 		switch(day.months) {
 		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
 			for(int i = 1; i < 32; i++)
@@ -49,6 +43,8 @@ public class DayPanel extends JPanel implements ActionListener {
 		case 2:
 			for(int i = 1; i < 29; i++)
 				days[i-1] = i + "";
+			if(day.years%4 == 0) 
+				days[28] = 29 +"";
 			break;
 		}
 
@@ -64,9 +60,17 @@ public class DayPanel extends JPanel implements ActionListener {
 			add(weekLabel[i]);
 		}
 
+
+		//날짜 앞 공백
+		for(int j = 0; j < blank[when]; j++) {
+			dayButton[j] = new JButton();
+			dayButton[j].setBackground(new Color(250, 237, 210));
+			add(dayButton[j]);
+			nextCount++;
+		}
 		//날짜 버튼 
 		int index = 0;
-		for(int i = nextCount; i < 42; i++) {
+		for(int i = blank[when]; i < 42; i++) {
 			dayButton[i] = new JButton(days[index]);
 			dayButton[i].setBackground(new Color(250, 237, 210));
 			if(i % 7 == 0)
@@ -82,7 +86,7 @@ public class DayPanel extends JPanel implements ActionListener {
 
 		//오늘 날짜 회색으로 표시
 		if(day.years == Today.tYear && day.months == Today.tMonth)
-			dayButton[Today.tDate-1].setBackground(new Color(236, 187, 83));
+			dayButton[blank[when] + Today.tDate-1].setBackground(new Color(236, 187, 83));
 
 		for(int i = 0; i < 42; i++) {
 			dayButton[i].addActionListener(this); 
@@ -92,6 +96,33 @@ public class DayPanel extends JPanel implements ActionListener {
 	public void change() {
 
 		//다이어리에서 년 월을 선택 시 새 판낼 리턴할 함수 만들어야함
+	}
+	public void fillBlank() {
+		//전 월이 몇월인지 확인 위한 변수
+		int mon = 0;
+		//전 월 공백 저장 변수
+		blank[0] = 3;
+		for(int i = 1; i < blank.length; i++) {
+			switch(i%12) {
+			case 1:case 2:case 4:case 6:case 8:case 9:case 11:
+				mon = 31;
+				break;
+			case 0:case 5: case 7: case 10:
+				mon = 30;
+				break;
+			case 3:
+				if(i%48 == 3) {
+					mon = 29;
+					break;
+				}
+				else {
+					mon = 28;
+					break;
+				}
+			}
+
+			blank[i] = 7 - (( 42 - (mon + blank[i-1]))  % 7);
+		}
 	}
 
 	@Override

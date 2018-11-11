@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class profileDlog extends JDialog{
 	private JLabel infoL = new JLabel("                ★ 애완동물의 프로필을 등록해 주세요 ★");
@@ -51,7 +53,7 @@ public class profileDlog extends JDialog{
 		setLocation(1200, 300);
 		setSize(350, 350);
 
-		
+
 		GridLayout grid = new GridLayout(6, 1);
 		grid.setVgap(10);
 		setLayout(grid);
@@ -61,10 +63,10 @@ public class profileDlog extends JDialog{
 		genderP.setLayout(new FlowLayout(FlowLayout.LEFT, 28 , 0));
 		yearP.setLayout(new FlowLayout());
 
-		
+
 		genderG.add(petMale);
 		genderG.add(petFemale);
-		
+
 		//콤보박스 값 년 월 일 생성
 		for(int i = 2000; i <= 2030; i++)
 			petYear.addItem(i);
@@ -74,9 +76,12 @@ public class profileDlog extends JDialog{
 		for(int i = 1; i<= 31; i++)
 			petDate.addItem(i);
 
+		//종 콤보박스 기본 값
+		petSpecies.addItem("선택하세요");
+
 		nameP.add(new JLabel("이름 :            "));
 		nameP.add(pfName);
-		speciesP.add(new JLabel("종 :         "));
+		speciesP.add(new JLabel("종 :     "));
 		speciesP.add(speciesList);  
 		speciesP.add(petSpecies);
 		genderP.add(new JLabel("성별 :         "));
@@ -98,18 +103,47 @@ public class profileDlog extends JDialog{
 		add(addButton);
 
 		setVisible(true);
-		
+
 		//무명클래스 이벤트 처리기
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			saveProfile.name = getPfName(); // 이름 등록 안한경우 null값
-			saveProfile.gender= getPfGender(); //(수컷은 0 , 암컷은 1, 선택안된경우 -1)
-			saveProfile.birthday = getPfBirthday();
-			JOptionPane.showMessageDialog(null, "                               등록완료", " 안내", JOptionPane.PLAIN_MESSAGE);
-			dispose();
+				saveProfile.name = getPfName(); // 이름 등록 안한경우 null값
+				saveProfile.gender= getPfGender(); //(수컷은 0 , 암컷은 1, 선택안된경우 -1)
+				saveProfile.birthday = getPfBirthday();
+				saveProfile.species = getPfSpecies();
+				JOptionPane.showMessageDialog(null, "                               등록완료", " 안내", JOptionPane.PLAIN_MESSAGE);
+				dispose();
 			}
 		});
-		
+
+		speciesList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if(speciesList.getSelectedIndex()==0) {
+					petSpecies.removeAllItems();
+					petSpecies.addItem("말티즈");
+					petSpecies.addItem("요크셔테리어");
+					petSpecies.addItem("시츄");
+					petSpecies.addItem("포메라니안");
+					petSpecies.addItem("치와와");
+					petSpecies.addItem("웰시코기");
+					petSpecies.addItem("슈나우저");
+					petSpecies.addItem("닥스훈트");
+					petSpecies.addItem("퍼그");
+					petSpecies.addItem("푸들");
+					petSpecies.addItem("페니키즈");
+					petSpecies.addItem("미니핀");
+					petSpecies.addItem("빠삐용");
+					petSpecies.addItem("기타");
+				}
+				if(speciesList.getSelectedIndex()==1) {
+					petSpecies.removeAllItems();
+					petSpecies.addItem("코리안숏헤어");
+					petSpecies.addItem("러시안블루");
+					petSpecies.addItem("기타");
+				}
+			}
+		});
+
 
 	}
 	//입력한 이름 리턴 메소드
@@ -126,6 +160,10 @@ public class profileDlog extends JDialog{
 		else
 			return -1;
 	}
+	//입력한 종 리턴 메소드
+	public String getPfSpecies() {
+		return (String) petSpecies.getSelectedItem();
+	}
 	//입력한 생일 리턴 메소드
 	public Day getPfBirthday() {
 		int year = (int)petYear.getSelectedItem();
@@ -134,5 +172,5 @@ public class profileDlog extends JDialog{
 		return new Day(year, month, date);
 	}
 	//나머지 입력값을 리턴하는 메소드 만들어야함
-	
+
 }
