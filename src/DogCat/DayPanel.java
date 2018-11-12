@@ -17,7 +17,6 @@ public class DayPanel extends JPanel implements ActionListener {
 	private String[] days;
 	private Day day;
 	//그 month에 몇개의  앞 공백이 있나 카운트
-	private int nextCount = 0;
 	//month에 몇개의 앞 공백이 있나 저장해논 배열 (index[1] 이 2000년 1월)(index[0]은 쓰레기 값)
 	private int[] blank = new int[373];
 	public int when;
@@ -67,7 +66,6 @@ public class DayPanel extends JPanel implements ActionListener {
 			dayButton[j] = new JButton();
 			dayButton[j].setBackground(new Color(250, 237, 210));
 			add(dayButton[j]);
-			nextCount++;
 		}
 		//날짜 버튼 
 		int index = 0;
@@ -89,11 +87,23 @@ public class DayPanel extends JPanel implements ActionListener {
 		if(day.years == Today.tYear && day.months == Today.tMonth)
 			dayButton[blank[when] + Today.tDate-1].setBackground(new Color(236, 187, 83));
 
+		//생일 적용
+		fillBirthday();
+		
 		for(int i = 0; i < 42; i++) {
 			dayButton[i].addActionListener(this); 
 		}
 
 	}
+	//생일 적용 함수
+	public void fillBirthday() {
+		if(saveProfile.create && saveProfile.birthday.months == day.months) {
+			dayButton[blank[when] + saveProfile.birthday.days-1].setBackground(new Color(233, 187, 219));
+			
+			//색깔 표시만 적용됨 내부에 생일 문구 작성하는 코드 만들어야함
+		}
+	}
+	
 	public void change() {
 
 		//다이어리에서 년 월을 선택 시 새 판낼 리턴할 함수 만들어야함

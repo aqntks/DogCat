@@ -1,8 +1,6 @@
 package DogCat;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -15,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class FDiary extends JFrame implements ActionListener{
+public class FDiary extends JFrame{
 	private JButton[] dayBt;
 	private JPanel weekP;
 	private DayPanel diaryP;
@@ -59,36 +57,28 @@ public class FDiary extends JFrame implements ActionListener{
 		add(diaryP, BorderLayout.CENTER);
 		pack();
 
-		yearMonthPanel.yearCb.addActionListener(this);
-		yearMonthPanel.monthCb.addActionListener(this);
+		yearMonthPanel.yearCb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				diaryP.removeAll();
+				yearMonth = new Day(yearMonthPanel.yearCb.getSelectedIndex()+2000 , yearMonth.months);
+				diaryP = new DayPanel(yearMonth);
+				add(diaryP, BorderLayout.CENTER);
+				diaryP.revalidate();
+				diaryP.repaint();
+			}
+		});
+		yearMonthPanel.monthCb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				diaryP.removeAll();
+				yearMonth = new Day(yearMonth.years , yearMonthPanel.monthCb.getSelectedIndex()+1);
+				diaryP = new DayPanel(yearMonth);
+				add(diaryP, BorderLayout.CENTER);
+				diaryP.revalidate();
+				diaryP.repaint();
+			}
+		});
 		setVisible(true);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		if(e.getSource() == yearMonthPanel.yearCb) {
-			//콤보박스 선택시 그에 맞는 day 패널 만들어야함
-			diaryP.removeAll();
-			yearMonth = new Day(yearMonthPanel.yearCb.getSelectedIndex()+2000 , yearMonth.months);
-			diaryP = new DayPanel(yearMonth);
-			add(diaryP, BorderLayout.CENTER);
-			diaryP.revalidate();
-			diaryP.repaint();
-		}
-		if(e.getSource() == yearMonthPanel.monthCb) {
-
-			diaryP.removeAll();
-			yearMonth = new Day(yearMonth.years , yearMonthPanel.monthCb.getSelectedIndex()+1);
-			diaryP = new DayPanel(yearMonth);
-			add(diaryP, BorderLayout.CENTER);
-			diaryP.revalidate();
-			diaryP.repaint();
-
-
-			//콤보박스 선택시 그에 맞는 day 패널 만들어야함
-		}
-
-	}
-
 }

@@ -24,4 +24,7 @@ public class Day {
 	public void setDays(int days) {
 		this.days = days;
 	}
+	public String print() {
+		return years + "." + months + "." + days;
+	}
 }

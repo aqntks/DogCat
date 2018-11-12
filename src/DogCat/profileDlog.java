@@ -111,6 +111,7 @@ public class profileDlog extends JDialog{
 				saveProfile.gender= getPfGender(); //(수컷은 0 , 암컷은 1, 선택안된경우 -1)
 				saveProfile.birthday = getPfBirthday();
 				saveProfile.species = getPfSpecies();
+				saveProfile.create = true;
 				JOptionPane.showMessageDialog(null, "                               등록완료", " 안내", JOptionPane.PLAIN_MESSAGE);
 				dispose();
 			}

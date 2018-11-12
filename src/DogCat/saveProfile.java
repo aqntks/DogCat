@@ -5,5 +5,6 @@ public class saveProfile {
 	public static int gender; //(수컷은 0 , 암컷은 1, 선택안된경우 -1)
 	public static Day birthday;
 	public static String species;
+	public static boolean create = false;
 	
 }
