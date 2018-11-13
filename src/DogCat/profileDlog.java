@@ -112,6 +112,7 @@ public class profileDlog extends JDialog{
 				saveProfile.birthday = getPfBirthday();
 				saveProfile.species = getPfSpecies();
 				saveProfile.create = true;
+				saveProfile.saveFile();
 				JOptionPane.showMessageDialog(null, "                               등록완료", " 안내", JOptionPane.PLAIN_MESSAGE);
 				dispose();
 			}

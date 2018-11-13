@@ -2,19 +2,20 @@ package DogCat;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -23,7 +24,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class DayMemo extends JFrame implements ActionListener{
-	private JTextArea taMemo;
+	private JTextArea taMemo1, taMemo2;
+	private JLabel lText1, lText2;
+	private JPanel pText;
 	private JPanel pMemo;
 	private JButton bSaveMemo, bCloseMemo;
 	private JMenuBar mbMemo;
@@ -31,14 +34,15 @@ public class DayMemo extends JFrame implements ActionListener{
 	private JMenuItem saveMenu, closeMenu;
 	public Day yearMonth;
 	public Day day;
-	private File file;
+	private File file1, file2;
 
 
 
 	public DayMemo(Day day) {
 		//어느 날짜의 메모인지 정보
 		this.day = day;
-		file = new File(day.print() + ".txt");
+		file1 = new File(day.print() + "-1.txt");
+		file2 = new File(day.print() + "-2.txt");
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -49,26 +53,45 @@ public class DayMemo extends JFrame implements ActionListener{
 		setTitle(day.years + "년 " + day.months + "월 " + day.days + "일");  //프레임 이름
 
 		//기록 창
-		taMemo = new JTextArea();
 
+		pText = new JPanel();
+		pText.setLayout(null);
+		lText1 = new JLabel("★ 중요 일정");
+		lText2 = new JLabel("★ 일기");
+		taMemo1 = new JTextArea();
+		taMemo2 = new JTextArea();
+		lText1.setBounds(10,10,200,20);
+		taMemo1.setBounds(10,40, 460, 100);
+		lText2.setBounds(10,150,200,20);
+		taMemo2.setBounds(10,180, 460, 200);
+		pText.add(lText1);
+		pText.add(taMemo1);
+		pText.add(lText2);
+		pText.add(taMemo2);
 
 		//파일 읽기
-		if(file.isFile()) {
+		if(file1.isFile()) {
 			try {
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				String str = br.readLine();
-				while(str != null){
-					taMemo.setText(str);
-					str = br.readLine();
+				Scanner scan = new Scanner(file1);
+				taMemo1.setText("");
+				while(scan.hasNextLine()) {
+					taMemo1.append(scan.nextLine() + "\n");
 				}
-				br.close();
 			} catch (FileNotFoundException e) {
-				System.out.println("에러 발생");
-			} catch (IOException e) {
 				System.out.println("에러 발생");
 			}
 		}
-
+		if(file2.isFile()) {
+			try {
+				Scanner scan = new Scanner(file2);
+				taMemo2.setText("");
+				while(scan.hasNextLine()) {
+					taMemo2.append(scan.nextLine() + "\n");
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("에러 발생");
+			}
+		}
 
 
 		//하단 판넬
@@ -83,7 +106,7 @@ public class DayMemo extends JFrame implements ActionListener{
 		bSaveMemo = new JButton("저장");
 		bCloseMemo = new JButton("종료");
 
-		this.add(taMemo);
+		this.add(pText);
 		this.add(pMemo, BorderLayout.SOUTH);
 		pMemo.add(bSaveMemo);
 		pMemo.add(bCloseMemo);
@@ -107,7 +130,8 @@ public class DayMemo extends JFrame implements ActionListener{
 	public DayMemo(DayMemo dm) {
 		//어느 날짜의 메모인지 정보
 		this.day = dm.day;
-		file = new File(day.print() + ".txt");
+		file1 = new File(day.print() + "-1.txt");
+		file2 = new File(day.print() + "-2.txt");
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -120,20 +144,42 @@ public class DayMemo extends JFrame implements ActionListener{
 
 
 		//기록 창
-		taMemo = SaveMemo.getMemo(day).taMemo;
+		taMemo1 = SaveMemo.getMemo(day).taMemo1;
+		taMemo2 = SaveMemo.getMemo(day).taMemo2;
+
+		pText = new JPanel();
+		pText.setLayout(null);
+		lText1 = new JLabel("★ 중요 일정");
+		lText2 = new JLabel("★ 일기");
+		lText1.setBounds(10,10,200,20);
+		taMemo1.setBounds(10,40, 460, 100);
+		lText2.setBounds(10,150,200,20);
+		taMemo2.setBounds(10,180, 460, 200);
+		pText.add(lText1);
+		pText.add(taMemo1);
+		pText.add(lText2);
+		pText.add(taMemo2);
+
 		//파일 읽기
-		if(file.isFile()) {
+		if(file1.isFile()) {
 			try {
-				BufferedReader br = new BufferedReader(new FileReader(file));
-				String str = br.readLine();
-				while(str != null){
-					taMemo.setText(str);
-					str = br.readLine();
+				Scanner scan = new Scanner(file1);
+				taMemo1.setText("");
+				while(scan.hasNextLine()) {
+					taMemo1.append(scan.nextLine() + "\n");
 				}
-				br.close();
 			} catch (FileNotFoundException e) {
 				System.out.println("에러 발생");
-			} catch (IOException e) {
+			}
+		}
+		if(file2.isFile()) {
+			try {
+				Scanner scan = new Scanner(file2);
+				taMemo2.setText("");
+				while(scan.hasNextLine()) {
+					taMemo2.append(scan.nextLine() + "\n");
+				}
+			} catch (FileNotFoundException e) {
 				System.out.println("에러 발생");
 			}
 		}
@@ -150,7 +196,7 @@ public class DayMemo extends JFrame implements ActionListener{
 		bSaveMemo = new JButton("저장");
 		bCloseMemo = new JButton("종료");
 
-		this.add(taMemo);
+		this.add(pText);
 		this.add(pMemo, BorderLayout.SOUTH);
 		pMemo.add(bSaveMemo);
 		pMemo.add(bCloseMemo);
@@ -179,9 +225,12 @@ public class DayMemo extends JFrame implements ActionListener{
 
 			try {
 				//file.createNewFile();
-				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-				bw.write(taMemo.getText()+" ");
-				bw.close(); 
+				BufferedWriter bw1 = new BufferedWriter(new FileWriter(file1));
+				BufferedWriter bw2 = new BufferedWriter(new FileWriter(file2));
+				bw1.write(taMemo1.getText()+" ");
+				bw2.write(taMemo2.getText()+" ");
+				bw1.close(); 
+				bw2.close();
 			} catch (IOException eI) {
 				System.out.println("에러 발생");
 			}
