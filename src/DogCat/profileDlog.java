@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -24,9 +25,10 @@ import javax.swing.event.ListSelectionListener;
 public class profileDlog extends JDialog{
 	private JLabel infoL = new JLabel("                ★ 애완동물의 프로필을 등록해 주세요 ★");
 	private JPanel nameP = new JPanel();
-	private JPanel speciesP = new JPanel();  // 아직 구현 안함
+	private JPanel speciesP = new JPanel(); 
 	private JPanel genderP = new JPanel();
 	private JPanel yearP  = new JPanel();
+	private JPanel buttonP = new JPanel();
 	private ButtonGroup genderG = new ButtonGroup();
 
 	private JTextField pfName = new JTextField(10);
@@ -40,6 +42,7 @@ public class profileDlog extends JDialog{
 	private JList<String> speciesList = new JList<String>(sp);
 
 	private JButton addButton = new JButton("등록");
+	private JButton resetButton = new JButton("초기화");
 
 	//생성자
 	public profileDlog() {
@@ -62,6 +65,7 @@ public class profileDlog extends JDialog{
 		speciesP.setLayout(new FlowLayout(FlowLayout.LEFT, 40 , 0));
 		genderP.setLayout(new FlowLayout(FlowLayout.LEFT, 28 , 0));
 		yearP.setLayout(new FlowLayout());
+		buttonP.setLayout(new FlowLayout());
 
 
 		genderG.add(petMale);
@@ -94,13 +98,15 @@ public class profileDlog extends JDialog{
 		yearP.add(new JLabel(" 월"));
 		yearP.add(petDate);
 		yearP.add(new JLabel(" 일"));
+		buttonP.add(addButton);
+		buttonP.add(resetButton);
 
 		add(infoL);
 		add(nameP);
 		add(genderP);
 		add(speciesP);
 		add(yearP);
-		add(addButton);
+		add(buttonP);
 
 		setVisible(true);
 
@@ -111,10 +117,26 @@ public class profileDlog extends JDialog{
 				saveProfile.gender= getPfGender(); //(수컷은 0 , 암컷은 1, 선택안된경우 -1)
 				saveProfile.birthday = getPfBirthday();
 				saveProfile.species = getPfSpecies();
+				saveProfile.age = (Today.tYear - getPfBirthday().years + 1) + "";
 				saveProfile.create = true;
 				saveProfile.saveFile();
 				JOptionPane.showMessageDialog(null, "                               등록완료", " 안내", JOptionPane.PLAIN_MESSAGE);
 				dispose();
+			}
+		});
+		
+		resetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int ys = JOptionPane.showConfirmDialog(null, "  프로필이 초기화 됩니다.", " 경고", JOptionPane.YES_NO_OPTION);
+			        if(ys == JOptionPane.YES_OPTION){
+			        	saveProfile.name = null; // 이름 등록 안한경우 null값
+						saveProfile.gender = -1; //(수컷은 0 , 암컷은 1, 선택안된경우 -1)
+						saveProfile.birthday = null;
+						saveProfile.species = null;
+						saveProfile.age = null;
+						saveProfile.create = false;
+			        	reset();
+			        }	
 			}
 		});
 
@@ -174,5 +196,11 @@ public class profileDlog extends JDialog{
 		return new Day(year, month, date);
 	}
 	//나머지 입력값을 리턴하는 메소드 만들어야함
-
+	
+	//등록한 프로필 초기화하는 함수
+	public void reset(){
+		File file = new File("profile.txt");
+		if(file.exists()) 
+			file.delete();
+	}
 }
