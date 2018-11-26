@@ -68,10 +68,15 @@ public class DayMemo extends JFrame implements ActionListener{
 		lText2.setBounds(10,150,200,20);
 		taMemo2.setBounds(10,180, 460, 200);
 		pText.add(lText1);
-		pText.add(lProfile);
 		pText.add(taMemo1);
 		pText.add(lText2);
 		pText.add(taMemo2);
+		
+		
+		//프로필이 생성되어있으면 메모에 프로필 출력 추가
+		File pFile = new File("profile.txt");
+		if(pFile.exists())
+		pText.add(lProfile);
 
 		//파일 읽기
 		if(file1.isFile()) {
@@ -162,11 +167,15 @@ public class DayMemo extends JFrame implements ActionListener{
 		lText2.setBounds(10,150,200,20);
 		taMemo2.setBounds(10,180, 460, 200);
 		pText.add(lText1);
-		pText.add(lProfile);
 		pText.add(taMemo1);
 		pText.add(lText2);
 		pText.add(taMemo2);
 
+		//프로필이 생성되어있으면 메모에 프로필 출력 추가
+		File pFile = new File("profile.txt");
+		if(pFile.exists())
+		pText.add(lProfile);
+		
 		//파일 읽기
 		if(file1.isFile()) {
 			try {

@@ -3,6 +3,8 @@ package DogCat;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +30,19 @@ public class FDog extends JFrame {
 			dogButton[i] = new JButton(dogs[i]);
 			add(dogButton[i]);
 		}
+		
+		for(int i = 0; i < dogButton.length; i++) {
+			dogButton[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					for(int i = 0; i < dogButton.length; i++) {
+						if(e.getSource() == dogButton[i])
+							new FSpeciesIf(dogs[i]);	
+					}
+				}
+			}); 
+		}
+		
 		
 		setVisible(true);
 	}
