@@ -144,19 +144,18 @@ public class profileDlog extends JDialog{
 			public void valueChanged(ListSelectionEvent e) {
 				if(speciesList.getSelectedIndex()==0) {
 					petSpecies.removeAllItems();
-					petSpecies.addItem("말티즈");
-					petSpecies.addItem("요크셔테리어");
-					petSpecies.addItem("시츄");
-					petSpecies.addItem("포메라니안");
-					petSpecies.addItem("치와와");
+					petSpecies.addItem("골든리트리버");
+					petSpecies.addItem("사모예드");
+					petSpecies.addItem("보더콜리");
 					petSpecies.addItem("웰시코기");
-					petSpecies.addItem("슈나우저");
 					petSpecies.addItem("닥스훈트");
+					petSpecies.addItem("비숑프리제");
+					petSpecies.addItem("말티즈");
+					petSpecies.addItem("치와와");
 					petSpecies.addItem("퍼그");
-					petSpecies.addItem("푸들");
-					petSpecies.addItem("페니키즈");
-					petSpecies.addItem("미니핀");
-					petSpecies.addItem("빠삐용");
+					petSpecies.addItem("요크셔테리어");
+					petSpecies.addItem("도베르만");
+					petSpecies.addItem("시츄");
 					petSpecies.addItem("기타");
 				}
 				if(speciesList.getSelectedIndex()==1) {
