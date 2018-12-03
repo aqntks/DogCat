@@ -160,14 +160,22 @@ public class profileDlog extends JDialog{
 				}
 				if(speciesList.getSelectedIndex()==1) {
 					petSpecies.removeAllItems();
-					petSpecies.addItem("코리안숏헤어");
+					petSpecies.addItem("먼치킨");
+					petSpecies.addItem("뱅갈");
+					petSpecies.addItem("브리티시숏헤어");
+					petSpecies.addItem("아비시니안");
+					petSpecies.addItem("스핑크스");
 					petSpecies.addItem("러시안블루");
+					petSpecies.addItem("페르시안");
+					petSpecies.addItem("랙돌");
+					petSpecies.addItem("노르웨이숲");
+					petSpecies.addItem("샴");
+					petSpecies.addItem("메인쿤");
+					petSpecies.addItem("터키시앙고라");
 					petSpecies.addItem("기타");
 				}
 			}
 		});
-
-
 	}
 	//입력한 이름 리턴 메소드
 	public String getPfName() {

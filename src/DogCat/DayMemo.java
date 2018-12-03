@@ -26,7 +26,7 @@ import javax.swing.JTextArea;
 public class DayMemo extends JFrame implements ActionListener{
 	private JTextArea taMemo1, taMemo2;
 	private JLabel lText1, lText2;
-	private JLabel lProfile;
+	private JLabel LImport, lProfile;
 	private JPanel pText;
 	private JPanel pMemo;
 	private JButton bSaveMemo, bCloseMemo;
@@ -59,10 +59,12 @@ public class DayMemo extends JFrame implements ActionListener{
 		pText.setLayout(null);
 		lText1 = new JLabel("★ 중요 일정");
 		lText2 = new JLabel("★ 일기");
+		LImport = new JLabel("^생일입니다^");
 		lProfile = new JLabel("- " + saveProfile.name + " (" + saveProfile.age + ")" + "   " + saveProfile.species + " -");
 		taMemo1 = new JTextArea();
 		taMemo2 = new JTextArea();
-		lText1.setBounds(10,10,200,20);
+		lText1.setBounds(10,10,100,20);
+		LImport.setBounds(150,10,100,20);
 		lProfile.setBounds(300, 10 , 200 ,20);
 		taMemo1.setBounds(10,40, 460, 100);
 		lText2.setBounds(10,150,200,20);
@@ -71,12 +73,14 @@ public class DayMemo extends JFrame implements ActionListener{
 		pText.add(taMemo1);
 		pText.add(lText2);
 		pText.add(taMemo2);
-		
-		
+
+		//생일이면 텍스트 출력
+		if(saveProfile.birthday.months == day.months && saveProfile.birthday.days == day.days)
+			pText.add(LImport);
 		//프로필이 생성되어있으면 메모에 프로필 출력 추가
 		File pFile = new File("profile.txt");
 		if(pFile.exists())
-		pText.add(lProfile);
+			pText.add(lProfile);
 
 		//파일 읽기
 		if(file1.isFile()) {
@@ -159,9 +163,11 @@ public class DayMemo extends JFrame implements ActionListener{
 		pText = new JPanel();
 		pText.setLayout(null);
 		lText1 = new JLabel("★ 중요 일정");
+		LImport = new JLabel("^생일입니다^");
 		lProfile = new JLabel("- " + saveProfile.name + " (" + saveProfile.age + ")" + "   " + saveProfile.species + " -");
 		lText2 = new JLabel("★ 일기");
 		lText1.setBounds(10,10,200,20);
+		LImport.setBounds(150,10,100,20);
 		lProfile.setBounds(300, 10 , 200 ,20);
 		taMemo1.setBounds(10,40, 460, 100);
 		lText2.setBounds(10,150,200,20);
@@ -171,11 +177,14 @@ public class DayMemo extends JFrame implements ActionListener{
 		pText.add(lText2);
 		pText.add(taMemo2);
 
+		//생일이면 텍스트 출력
+		if(saveProfile.birthday.months == day.months && saveProfile.birthday.days == day.days)
+			pText.add(LImport);
 		//프로필이 생성되어있으면 메모에 프로필 출력 추가
 		File pFile = new File("profile.txt");
 		if(pFile.exists())
-		pText.add(lProfile);
-		
+			pText.add(lProfile);
+
 		//파일 읽기
 		if(file1.isFile()) {
 			try {

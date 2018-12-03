@@ -59,24 +59,26 @@ public class FDiary extends JFrame{
 
 		yearMonthPanel.yearCb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
-			{
-				diaryP.removeAll();
+			{		
+				
+				remove(diaryP);
 				yearMonth = new Day(yearMonthPanel.yearCb.getSelectedIndex()+2000 , yearMonth.months);
 				diaryP = new DayPanel(yearMonth);
 				add(diaryP, BorderLayout.CENTER);
-				diaryP.revalidate();
-				diaryP.repaint();
+				revalidate();
+				repaint();
+				
 			}
 		});
 		yearMonthPanel.monthCb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				diaryP.removeAll();
+				remove(diaryP);
 				yearMonth = new Day(yearMonth.years , yearMonthPanel.monthCb.getSelectedIndex()+1);
 				diaryP = new DayPanel(yearMonth);
 				add(diaryP, BorderLayout.CENTER);
-				diaryP.revalidate();
-				diaryP.repaint();
+				revalidate();
+				repaint();
 			}
 		});
 		setVisible(true);

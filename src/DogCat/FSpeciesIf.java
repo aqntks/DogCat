@@ -243,8 +243,31 @@ public class FSpeciesIf extends JFrame{
 					+ "반면에, 자존심이 강한 편이므로 주인이 난폭해지거나 화를 내면 이에 대한 반응이 매우 빠르다."
 					+ "</body></html>");
 			break;
+		case "먼치킨":
+			break;
+		case "뱅갈":
+			break;
+		case "브리티시숏헤어":
+			break;
+		case "아비시니안":
+			break;
+		case "스핑크스":
+			break;
+		case "러시안블루":
+			break;
+		case "페르시안":
+			break;
+		case "랙돌":
+			break;
+		case "노르웨이숲":
+			break;
+		case "샴":
+			break;
+		case "메인쿤":
+			break;
+		case "터키시앙고라":
+			break;
 		}
-
 		add(informationL);
 
 		setVisible(true);
