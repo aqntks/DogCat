@@ -78,7 +78,7 @@ public class FMain extends JFrame implements ActionListener{
 		if(e.getSource() == speciesBt) {
 			FDogCat dogcat = new FDogCat();
 			//이미지 추가에 필요함
-			dogcat.add(new LoadImageApp());
+			dogcat.add(new LoadImage(1));
 			dogcat.pack();
 			dogcat.setVisible(true);
 			//dogcat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

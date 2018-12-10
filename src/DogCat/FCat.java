@@ -51,8 +51,12 @@ public class FCat extends JFrame {
 				public void actionPerformed(ActionEvent e)
 				{
 					for(int i = 0; i < catButton.length; i++) {
-						if(e.getSource() == catButton[i])
-							new FSpeciesIf(cats[i]);	
+						if(e.getSource() == catButton[i]) {	
+							FSpeciesIf fi = new FSpeciesIf(cats[i]);
+							fi.add(new LoadImage(1, cats[i]));
+							fi.pack();
+							fi.setVisible(true);
+						}
 					}
 				}
 			}); 

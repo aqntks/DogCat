@@ -51,8 +51,12 @@ public class FDog extends JFrame {
 				public void actionPerformed(ActionEvent e)
 				{
 					for(int i = 0; i < dogButton.length; i++) {
-						if(e.getSource() == dogButton[i])
-							new FSpeciesIf(dogs[i]);	
+						if(e.getSource() == dogButton[i]) {
+							FSpeciesIf fi = new FSpeciesIf(dogs[i]);
+							fi.add(new LoadImage(0, dogs[i]));
+							fi.pack();
+							fi.setVisible(true);
+						}
 					}
 				}
 			}); 

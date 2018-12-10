@@ -47,8 +47,9 @@ public class FDogCat extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if(e.getSource() == dogButton)
+		if(e.getSource() == dogButton) 
 			new FDog();
+		
 		if(e.getSource() == catButton)
 			new FCat();
 		if(e.getSource() == endButton)

@@ -1,5 +1,6 @@
 package DogCat;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -16,9 +17,12 @@ public class FSpeciesIf extends JFrame{
 		Dimension screenSize = kit.getScreenSize();
 
 		setSize(600,600);  //프레임 사이즈
-		setLocation(700, 300);  //프레임 생성 위치
+		setLocation(300, 100);  //프레임 생성 위치
 		setTitle(species);  //프레임 이름
 
+		setLayout(new BorderLayout());
+		
+		
 		String blank = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 		switch(species) {
 		case "골든리트리버":
@@ -268,7 +272,7 @@ public class FSpeciesIf extends JFrame{
 		case "터키시앙고라":
 			break;
 		}
-		add(informationL);
+		add(informationL, BorderLayout.SOUTH);
 
 		setVisible(true);
 	}
