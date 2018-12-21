@@ -12,7 +12,7 @@ public class FInformation extends JFrame {
 		Dimension screenSize = kit.getScreenSize();
 
 		setSize(300,300);  //프레임 사이즈
-		setLocation(1200, 500);  //프레임 생성 위치
+		setLocation(1200, 100);  //프레임 생성 위치
 		setTitle("정보");  //프레임 이름
 		
 		setVisible(true);

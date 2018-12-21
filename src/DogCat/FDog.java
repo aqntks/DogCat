@@ -22,7 +22,8 @@ public class FDog extends JFrame {
 	
 	public FDog() {
 		dogButton = new JButton[12];
-		dogL = new JLabel("구경하고 싶은 강아지를 선택하세요");
+		dogL = new JLabel("                                              "
+				+ "                 ★ 구경하고 싶은 강아지를 선택하세요 ★");
 		dogP = new JPanel();
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();

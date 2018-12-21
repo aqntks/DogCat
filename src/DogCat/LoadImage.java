@@ -24,6 +24,9 @@ public class LoadImage extends JPanel{
 			case 1:  //종 메뉴 이미지
 				img = ImageIO.read(new File("main_icon.gif"));
 				break;
+			case 2:  //정보 메뉴 이미지
+				img = ImageIO.read(new File("info.png"));
+				break;
 			}
 
 		}

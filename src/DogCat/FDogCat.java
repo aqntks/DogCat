@@ -1,6 +1,7 @@
 package DogCat;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -22,7 +23,7 @@ public class FDogCat extends JFrame implements ActionListener {
 		setSize(300,300);  //프레임 사이즈
 		setLocation(1200, 400);  //프레임 생성 위치
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		setTitle("DogCat");  //프레임 이름
+		setTitle("종");  //프레임 이름
 		Image img = kit.getImage("main_icon.gif");  // 아이콘 이미지
 		setIconImage(img);
 		setVisible(true);
@@ -31,6 +32,9 @@ public class FDogCat extends JFrame implements ActionListener {
 		dogButton = new JButton("강아지");
 		catButton = new JButton("고양이");
 		endButton = new JButton("종료");
+		dogButton.setBackground(new Color(206, 222, 239));
+		catButton.setBackground(new Color(206, 222, 239));
+		endButton.setBackground(new Color(216, 216, 216));
 		this.add(dogButton, BorderLayout.LINE_START);
 		this.add(catButton, BorderLayout.LINE_END);
 		this.add(endButton, BorderLayout.PAGE_END);

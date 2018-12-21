@@ -22,7 +22,8 @@ public class FCat extends JFrame {
 
 	public FCat() {
 		catButton = new JButton[12];
-		catL = new JLabel("구경하고 싶은 고양이를 선택하세요");
+		catL = new JLabel("                                              "
+				+ "                 ★ 구경하고 싶은 고양이를 선택하세요 ★");
 		catP = new JPanel();
 
 		Toolkit kit = Toolkit.getDefaultToolkit();

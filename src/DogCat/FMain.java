@@ -90,6 +90,9 @@ public class FMain extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == informationBt) {
 			FInformation information = new FInformation();
+			information.add(new LoadImage(2));
+			information.pack();
+			information.setVisible(true);
 			//dispose();
 		}
 		if(e.getSource() == diaryBt) {

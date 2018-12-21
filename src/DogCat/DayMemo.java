@@ -74,13 +74,15 @@ public class DayMemo extends JFrame implements ActionListener{
 		pText.add(lText2);
 		pText.add(taMemo2);
 
-		//생일이면 텍스트 출력
-		if(saveProfile.birthday.months == day.months && saveProfile.birthday.days == day.days)
-			pText.add(LImport);
 		//프로필이 생성되어있으면 메모에 프로필 출력 추가
 		File pFile = new File("profile.txt");
-		if(pFile.exists())
+		if(pFile.exists()) {
 			pText.add(lProfile);
+
+			//생일이면 텍스트 출력
+			if(saveProfile.birthday.months == day.months && saveProfile.birthday.days == day.days)
+				pText.add(LImport);
+		}
 
 		//파일 읽기
 		if(file1.isFile()) {
@@ -177,13 +179,16 @@ public class DayMemo extends JFrame implements ActionListener{
 		pText.add(lText2);
 		pText.add(taMemo2);
 
-		//생일이면 텍스트 출력
-		if(saveProfile.birthday.months == day.months && saveProfile.birthday.days == day.days)
-			pText.add(LImport);
+
 		//프로필이 생성되어있으면 메모에 프로필 출력 추가
 		File pFile = new File("profile.txt");
-		if(pFile.exists())
+		if(pFile.exists()) {
 			pText.add(lProfile);
+
+			//생일이면 텍스트 출력
+			if(saveProfile.birthday.months == day.months && saveProfile.birthday.days == day.days)
+				pText.add(LImport);
+		}
 
 		//파일 읽기
 		if(file1.isFile()) {

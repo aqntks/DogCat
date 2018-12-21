@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,7 +32,6 @@ public class DayPanel extends JPanel {
 		weekLabel = new JLabel[7];
 		when = (day.years - 2000)*12 + day.months;
 		fillBlank();
-
 		//버튼 날짜 표시
 		switch(day.months) {
 		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -46,7 +46,7 @@ public class DayPanel extends JPanel {
 			for(int i = 1; i < 29; i++)
 				days[i-1] = i + "";
 			if(day.years%4 == 0) 
-				days[28] = 29 +"";
+				days[28] = 29 + "";
 			break;
 		}
 
@@ -72,8 +72,15 @@ public class DayPanel extends JPanel {
 		//날짜 버튼 
 		int index = 0;
 		for(int i = blank[when]; i < 42; i++) {
+
 			dayButton[i] = new JButton(days[index]);
-			dayButton[i].setBackground(new Color(250, 237, 210));
+
+			//중요문서 저장 표시
+			File pFile = new File(new Day(day.years, day.months, index+1).print() + "-1.txt");
+			if(pFile.exists())	
+				dayButton[i].setBackground(new Color(233, 187, 219));
+			else
+				dayButton[i].setBackground(new Color(250, 237, 210));
 			if(i % 7 == 0)
 				dayButton[i].setForeground(new Color(189, 61, 61));
 			else if(i % 7 == 6)
@@ -114,7 +121,7 @@ public class DayPanel extends JPanel {
 	//생일 적용 함수
 	public void fillBirthday() {
 		if(saveProfile.create && saveProfile.birthday.months == day.months) {
-			dayButton[blank[when] + saveProfile.birthday.days-1].setBackground(new Color(233, 187, 219));
+			dayButton[blank[when] + saveProfile.birthday.days-1].setBackground(new Color(163, 215, 221));
 
 			//색깔 표시만 적용됨 내부에 생일 문구 작성하는 코드 만들어야함
 		}
